@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Department Feedback / அவசர சிகிச்சை பிரிவு கருத்து</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-ta {
+            font-family: 'Noto Sans Tamil', sans-serif;
+        }
+        .kiosk-container {
+            width: 1080px; /* Width for a vertical 32-inch display (1080x1920) */
+            height: 1920px;
+            margin: 0 auto;
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 4rem; /* Larger stars for touch */
+            color: #d1d5db; /* Gray color for unselected stars */
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f59e0b; /* Yellow color for selected/hovered stars */
+        }
+        .emoji-rating input[type="radio"] {
+            display: none;
+        }
+        .emoji-rating label {
+            font-size: 6rem; /* Larger emojis for touch */
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .emoji-rating input[type="radio"]:checked + label {
+            transform: scale(1.2);
+            filter: grayscale(0%);
+        }
+        .emoji-rating label {
+             filter: grayscale(80%);
+        }
+        .form-section {
+            padding: 2.5rem; /* Increased padding for better spacing */
+            margin-bottom: 2rem;
+            border-radius: 1.5rem; /* More rounded corners */
+        }
+        .question-text {
+            font-size: 2.25rem; /* Larger font for questions */
+            font-weight: 500;
+            margin-bottom: 2rem; /* More space below question */
+            line-height: 1.4;
+        }
+        .btn-submit {
+            font-size: 2.5rem;
+            padding: 1.5rem 3rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-submit:disabled {
+            background-color: #9ca3af; /* gray-400 */
+            cursor: not-allowed;
+        }
+        textarea, input[type="tel"] {
+            font-size: 1.75rem; /* Larger textarea font */
+        }
+        .lang-btn {
+            font-size: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .lang-btn.active {
+            background-color: white;
+            color: #2563eb; /* blue-600 */
+        }
+        .lang-btn.inactive {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 flex items-center justify-center">
+    <div class="kiosk-container bg-white shadow-2xl overflow-y-auto">
+        
+        <!-- English View -->
+        <div id="english-view">
+            <header class="bg-blue-600 text-white p-8 relative">
+                <div class="text-center">
+                    <h1 class="text-5xl font-bold">Feedback Portal</h1>
+                    <p class="text-2xl mt-2 font-semibold">Emergency Medical Services</p>
+                    <p class="text-xl mt-2">Your feedback helps us improve.</p>
+                </div>
+                <div class="absolute top-8 right-8 flex gap-4">
+                    <button id="btn-en-active" class="lang-btn active">English</button>
+                    <button id="btn-ta-inactive" class="lang-btn inactive">தமிழ்</button>
+                </div>
+            </header>
+            <main class="p-8 md:p-12">
+                <form id="feedbackFormEn">
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">1. How would you rate your waiting time?</p>
+                        <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="en-wait-5" name="waiting_time" value="5"><label for="en-wait-5">★</label>
+                            <input type="radio" id="en-wait-4" name="waiting_time" value="4"><label for="en-wait-4">★</label>
+                            <input type="radio" id="en-wait-3" name="waiting_time" value="3"><label for="en-wait-3">★</label>
+                            <input type="radio" id="en-wait-2" name="waiting_time" value="2"><label for="en-wait-2">★</label>
+                            <input type="radio" id="en-wait-1" name="waiting_time" value="1" required><label for="en-wait-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">2. How was the behavior of our staff?</p>
+                        <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="en-staff-5" name="staff_behavior" value="5"><label for="en-staff-5">★</label>
+                            <input type="radio" id="en-staff-4" name="staff_behavior" value="4"><label for="en-staff-4">★</label>
+                            <input type="radio" id="en-staff-3" name="staff_behavior" value="3"><label for="en-staff-3">★</label>
+                            <input type="radio" id="en-staff-2" name="staff_behavior" value="2"><label for="en-staff-2">★</label>
+                            <input type="radio" id="en-staff-1" name="staff_behavior" value="1" required><label for="en-staff-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">3. How would you rate the cleanliness of the premises?</p>
+                        <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="en-clean-5" name="cleanliness" value="5"><label for="en-clean-5">★</label>
+                            <input type="radio" id="en-clean-4" name="cleanliness" value="4"><label for="en-clean-4">★</label>
+                            <input type="radio" id="en-clean-3" name="cleanliness" value="3"><label for="en-clean-3">★</label>
+                            <input type="radio" id="en-clean-2" name="cleanliness" value="2"><label for="en-clean-2">★</label>
+                            <input type="radio" id="en-clean-1" name="cleanliness" value="1" required><label for="en-clean-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">4. How would you rate your overall experience?</p>
+                        <div class="emoji-rating flex justify-around items-center">
+                            <div><input type="radio" id="en-emoji-1" name="overall_experience" value="1" required><label for="en-emoji-1">😞</label></div>
+                            <div><input type="radio" id="en-emoji-2" name="overall_experience" value="2"><label for="en-emoji-2">😐</label></div>
+                            <div><input type="radio" id="en-emoji-3" name="overall_experience" value="3"><label for="en-emoji-3">🙂</label></div>
+                            <div><input type="radio" id="en-emoji-4" name="overall_experience" value="4"><label for="en-emoji-4">😊</label></div>
+                            <div><input type="radio" id="en-emoji-5" name="overall_experience" value="5"><label for="en-emoji-5">🤩</label></div>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">5. Do you have any other comments, suggestions, or complaints? (Optional)</p>
+                        <textarea name="comments" rows="5" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Type your comments here..."></textarea>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">6. To discuss your feedback, please provide your phone number. (Optional)</p>
+                        <input type="tel" name="phone_number" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Enter your phone number...">
+                    </div>
+                    <div class="mt-12 text-center">
+                        <button type="submit" id="submitBtnEn" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full shadow-lg transform hover:scale-105">
+                            Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+
+        <!-- Tamil View -->
+        <div id="tamil-view" class="hidden lang-ta">
+            <header class="bg-blue-600 text-white p-8 relative">
+                <div class="text-center">
+                    <h1 class="text-5xl font-bold">கருத்து பகிரும் தளம்</h1>
+                    <p class="text-2xl mt-2 font-semibold">அவசர மருத்துவ சேவைகள்</p>
+                    <p class="text-xl mt-2">உங்கள் கருத்து எங்களை மேம்படுத்த உதவுகிறது.</p>
+                </div>
+                 <div class="absolute top-8 right-8 flex gap-4">
+                    <button id="btn-en-inactive" class="lang-btn inactive">English</button>
+                    <button id="btn-ta-active" class="lang-btn active">தமிழ்</button>
+                </div>
+            </header>
+             <main class="p-8 md:p-12">
+                <form id="feedbackFormTa">
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">1. உங்கள் காத்திருப்பு நேரத்தை நீங்கள் எப்படி மதிப்பிடுவீர்கள்?</p>
+                        <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="ta-wait-5" name="waiting_time" value="5"><label for="ta-wait-5">★</label>
+                            <input type="radio" id="ta-wait-4" name="waiting_time" value="4"><label for="ta-wait-4">★</label>
+                            <input type="radio" id="ta-wait-3" name="waiting_time" value="3"><label for="ta-wait-3">★</label>
+                            <input type="radio" id="ta-wait-2" name="waiting_time" value="2"><label for="ta-wait-2">★</label>
+                            <input type="radio" id="ta-wait-1" name="waiting_time" value="1" required><label for="ta-wait-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">2. எங்கள் ஊழியர்களின் நடத்தை எப்படி இருந்தது?</p>
+                        <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="ta-staff-5" name="staff_behavior" value="5"><label for="ta-staff-5">★</label>
+                            <input type="radio" id="ta-staff-4" name="staff_behavior" value="4"><label for="ta-staff-4">★</label>
+                            <input type="radio" id="ta-staff-3" name="staff_behavior" value="3"><label for="ta-staff-3">★</label>
+                            <input type="radio" id="ta-staff-2" name="staff_behavior" value="2"><label for="ta-staff-2">★</label>
+                            <input type="radio" id="ta-staff-1" name="staff_behavior" value="1" required><label for="ta-staff-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">3. வளாகத்தின் தூய்மையை நீங்கள் எப்படி மதிப்பிடுவீர்கள்?</p>
+                         <div class="star-rating flex flex-row-reverse justify-center gap-4">
+                            <input type="radio" id="ta-clean-5" name="cleanliness" value="5"><label for="ta-clean-5">★</label>
+                            <input type="radio" id="ta-clean-4" name="cleanliness" value="4"><label for="ta-clean-4">★</label>
+                            <input type="radio" id="ta-clean-3" name="cleanliness" value="3"><label for="ta-clean-3">★</label>
+                            <input type="radio" id="ta-clean-2" name="cleanliness" value="2"><label for="ta-clean-2">★</label>
+                            <input type="radio" id="ta-clean-1" name="cleanliness" value="1" required><label for="ta-clean-1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">4. உங்கள் ஒட்டுமொத்த அனுபவத்தை எப்படி மதிப்பிடுவீர்கள்?</p>
+                        <div class="emoji-rating flex justify-around items-center">
+                            <div><input type="radio" id="ta-emoji-1" name="overall_experience" value="1" required><label for="ta-emoji-1">😞</label></div>
+                            <div><input type="radio" id="ta-emoji-2" name="overall_experience" value="2"><label for="ta-emoji-2">😐</label></div>
+                            <div><input type="radio" id="ta-emoji-3" name="overall_experience" value="3"><label for="ta-emoji-3">🙂</label></div>
+                            <div><input type="radio" id="ta-emoji-4" name="overall_experience" value="4"><label for="ta-emoji-4">😊</label></div>
+                            <div><input type="radio" id="ta-emoji-5" name="overall_experience" value="5"><label for="ta-emoji-5">🤩</label></div>
+                        </div>
+                    </div>
+                    <div class="form-section bg-slate-50">
+                        <p class="question-text">5. உங்களுக்கு வேறு ஏதேனும் கருத்துகள், பரிந்துரைகள் அல்லது புகார்கள் உள்ளதா? (விருப்பத்திற்குரியது)</p>
+                        <textarea name="comments" rows="5" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் கருத்துகளை இங்கே உள்ளிடவும்..."></textarea>
+                    </div>
+                     <div class="form-section bg-slate-50">
+                        <p class="question-text">6. உங்கள் கருத்தைப் பற்றி விவாதிக்க, உங்கள் தொலைபேசி எண்ணை வழங்கவும். (விருப்பத்திற்குரியது)</p>
+                        <input type="tel" name="phone_number" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்...">
+                    </div>
+                    <div class="mt-12 text-center">
+                        <button type="submit" id="submitBtnTa" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full shadow-lg transform hover:scale-105">
+                            கருத்தை சமர்ப்பிக்கவும்
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+
+        <!-- Thank you message -->
+        <div id="thank-you-view" class="hidden h-full flex-col items-center justify-center text-center p-12 bg-blue-600 text-white">
+            <div id="thank-you-content">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- IMPORTANT: THE SCRIPT URL IS NOW SET ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzV4mVuocmtQdrNKoqMCnIm7PfRQOGTFhgumJOuPDNpx7oX4DHOh9LrMnp6sPPiGpjVg/exec"; 
+
+        // --- DOM Elements ---
+        const englishView = document.getElementById('english-view');
+        const tamilView = document.getElementById('tamil-view');
+        const thankYouView = document.getElementById('thank-you-view');
+        const thankYouContent = document.getElementById('thank-you-content');
+        
+        const feedbackFormEn = document.getElementById('feedbackFormEn');
+        const feedbackFormTa = document.getElementById('feedbackFormTa');
+
+        const submitBtnEn = document.getElementById('submitBtnEn');
+        const submitBtnTa = document.getElementById('submitBtnTa');
+        
+        const langButtons = [
+            document.getElementById('btn-en-active'),
+            document.getElementById('btn-ta-inactive'),
+            document.getElementById('btn-en-inactive'),
+            document.getElementById('btn-ta-active')
+        ];
+
+        // --- Functions ---
+        
+        function setLanguage(lang) {
+            if (lang === 'ta') {
+                englishView.classList.add('hidden');
+                tamilView.classList.remove('hidden');
+            } else {
+                tamilView.classList.add('hidden');
+                englishView.classList.remove('hidden');
+            }
+        }
+        
+        function handleFormSubmit(event, lang) {
+            event.preventDefault();
+            
+            const form = lang === 'en' ? feedbackFormEn : feedbackFormTa;
+            const submitBtn = lang === 'en' ? submitBtnEn : submitBtnTa;
+            const originalBtnText = submitBtn.textContent;
+
+            // Disable button to prevent multiple submissions
+            submitBtn.disabled = true;
+            submitBtn.textContent = lang === 'en' ? 'Submitting...' : 'சமர்ப்பிக்கிறது...';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.language = lang;
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important for sending data to Google Apps Script
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                // Because of 'no-cors' mode, we can't read the response.
+                // We assume success and show the thank you message.
+                showThankYouMessage(lang);
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                showThankYouMessage(lang);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
+        }
+
+        function showThankYouMessage(lang) {
+             const thankYouHTML = lang === 'en' 
+                ? `<div class="text-8xl mb-8">✓</div>
+                   <h2 class="text-7xl font-bold mb-6">Thank You!</h2>
+                   <p class="text-4xl">Your feedback has been submitted successfully.</p>
+                   <p class="text-3xl mt-12">This screen will reset shortly.</p>`
+                : `<div class="lang-ta">
+                     <div class="text-8xl mb-8">✓</div>
+                     <h2 class="text-7xl font-bold mb-6">நன்றி!</h2>
+                     <p class="text-4xl">உங்கள் கருத்து வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.</p>
+                     <p class="text-3xl mt-12">இந்தத் திரை விரைவில் மீட்டமைக்கப்படும்.</p>
+                   </div>`;
+
+            thankYouContent.innerHTML = thankYouHTML;
+            englishView.classList.add('hidden');
+            tamilView.classList.add('hidden');
+            thankYouView.classList.add('flex');
+
+            setTimeout(() => {
+                feedbackFormEn.reset();
+                feedbackFormTa.reset();
+                thankYouView.classList.remove('flex');
+                thankYouView.classList.add('hidden');
+                setLanguage('en');
+            }, 5000);
+        }
+
+        // --- Event Listeners ---
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const lang = button.id.includes('ta') ? 'ta' : 'en';
+                setLanguage(lang);
+            });
+        });
+
+        feedbackFormEn.addEventListener('submit', (e) => handleFormSubmit(e, 'en'));
+        feedbackFormTa.addEventListener('submit', (e) => handleFormSubmit(e, 'ta'));
+
+        // --- Initial State ---
+        setLanguage('en'); // Set default language to English
+    </script></body>
+</html>
