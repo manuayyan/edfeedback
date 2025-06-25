@@ -18,25 +18,26 @@
             height: 1920px;
             margin: 0 auto;
         }
+        /* --- Style Adjustments for Compact View --- */
         .star-rating input[type="radio"] {
             display: none;
         }
         .star-rating label {
-            font-size: 4rem; /* Larger stars for touch */
-            color: #d1d5db; /* Gray color for unselected stars */
+            font-size: 3.5rem; /* Reduced from 4rem */
+            color: #d1d5db;
             cursor: pointer;
             transition: color 0.2s;
         }
         .star-rating input[type="radio"]:checked ~ label,
         .star-rating label:hover,
         .star-rating label:hover ~ label {
-            color: #f59e0b; /* Yellow color for selected/hovered stars */
+            color: #f59e0b;
         }
         .emoji-rating input[type="radio"] {
             display: none;
         }
         .emoji-rating label {
-            font-size: 6rem; /* Larger emojis for touch */
+            font-size: 5rem; /* Reduced from 6rem */
             cursor: pointer;
             transition: transform 0.2s;
             display: inline-block;
@@ -49,31 +50,32 @@
              filter: grayscale(80%);
         }
         .form-section {
-            padding: 2.5rem; /* Increased padding for better spacing */
-            margin-bottom: 2rem;
-            border-radius: 1.5rem; /* More rounded corners */
+            padding: 2rem; /* Reduced from 2.5rem */
+            margin-bottom: 1.5rem; /* Reduced from 2rem */
+            border-radius: 1.5rem;
         }
         .question-text {
-            font-size: 2.25rem; /* Larger font for questions */
+            font-size: 2rem; /* Reduced from 2.25rem */
             font-weight: 500;
-            margin-bottom: 2rem; /* More space below question */
+            margin-bottom: 1.5rem; /* Reduced from 2rem */
             line-height: 1.4;
         }
         .btn-submit {
-            font-size: 2.5rem;
-            padding: 1.5rem 3rem;
+            font-size: 2.25rem; /* Reduced from 2.5rem */
+            padding: 1.25rem 2.5rem; /* Reduced padding */
             transition: background-color 0.3s, transform 0.2s;
         }
         .btn-submit:disabled {
-            background-color: #9ca3af; /* gray-400 */
+            background-color: #9ca3af;
             cursor: not-allowed;
         }
         textarea, input[type="tel"] {
-            font-size: 1.75rem; /* Larger textarea font */
+            font-size: 1.5rem; /* Reduced from 1.75rem */
+            padding: 1rem; /* Reduced padding */
         }
         .lang-btn {
-            font-size: 1.5rem;
-            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem; /* Reduced from 1.5rem */
+            padding: 0.5rem 1.25rem; /* Reduced padding */
             border-radius: 0.75rem;
             font-weight: 600;
             cursor: pointer;
@@ -81,7 +83,7 @@
         }
         .lang-btn.active {
             background-color: white;
-            color: #2563eb; /* blue-600 */
+            color: #2563eb;
         }
         .lang-btn.inactive {
             background-color: transparent;
@@ -97,16 +99,22 @@
         <div id="english-view">
             <header class="bg-blue-600 text-white p-8 relative">
                 <div class="text-center">
-                    <h1 class="text-5xl font-bold">Feedback Portal</h1>
-                    <p class="text-2xl mt-2 font-semibold">Emergency Medical Services</p>
-                    <p class="text-xl mt-2">Your feedback helps us improve.</p>
+                    <h1 class="text-4xl font-bold leading-tight">
+                        <span class="font-sans">Feedback Portal</span><br><span class="lang-ta">கருத்து பகிரும் தளம்</span>
+                    </h1>
+                    <p class="text-2xl mt-3 font-semibold leading-tight">
+                        <span class="font-sans">Emergency Medical Services</span><br><span class="lang-ta">அவசர மருத்துவ சேவைகள்</span>
+                    </p>
+                    <p class="text-lg mt-3">
+                        <span class="font-sans">Your feedback helps us improve.</span><br><span class="lang-ta">உங்கள் கருத்து எங்களை மேம்படுத்த உதவுகிறது.</span>
+                    </p>
                 </div>
-                <div class="absolute top-8 right-8 flex gap-4">
+                <div class="absolute top-8 right-8 flex gap-3">
                     <button id="btn-en-active" class="lang-btn active">English</button>
                     <button id="btn-ta-inactive" class="lang-btn inactive">தமிழ்</button>
                 </div>
             </header>
-            <main class="p-8 md:p-12">
+            <main class="p-8 md:p-10">
                 <form id="feedbackFormEn">
                     <div class="form-section bg-slate-50">
                         <p class="question-text">1. How would you rate your waiting time?</p>
@@ -150,14 +158,14 @@
                     </div>
                     <div class="form-section bg-slate-50">
                         <p class="question-text">5. Do you have any other comments, suggestions, or complaints? (Optional)</p>
-                        <textarea name="comments" rows="5" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Type your comments here..."></textarea>
+                        <textarea name="comments" rows="4" class="w-full p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Type your comments here..."></textarea>
                     </div>
                     <div class="form-section bg-slate-50">
                         <p class="question-text">6. To discuss your feedback, please provide your phone number. (Optional)</p>
-                        <input type="tel" name="phone_number" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Enter your phone number...">
+                        <input type="tel" name="phone_number" class="w-full p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="Enter your phone number...">
                     </div>
-                    <div class="mt-12 text-center">
-                        <button type="submit" id="submitBtnEn" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full shadow-lg transform hover:scale-105">
+                    <div class="mt-8 text-center">
+                        <button type="submit" id="submitBtnEn" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow-lg transform hover:scale-105">
                             Submit Feedback
                         </button>
                     </div>
@@ -169,16 +177,22 @@
         <div id="tamil-view" class="hidden lang-ta">
             <header class="bg-blue-600 text-white p-8 relative">
                 <div class="text-center">
-                    <h1 class="text-5xl font-bold">கருத்து பகிரும் தளம்</h1>
-                    <p class="text-2xl mt-2 font-semibold">அவசர மருத்துவ சேவைகள்</p>
-                    <p class="text-xl mt-2">உங்கள் கருத்து எங்களை மேம்படுத்த உதவுகிறது.</p>
+                    <h1 class="text-4xl font-bold leading-tight">
+                        <span class="font-sans">Feedback Portal</span><br><span class="lang-ta">கருத்து பகிரும் தளம்</span>
+                    </h1>
+                    <p class="text-2xl mt-3 font-semibold leading-tight">
+                        <span class="font-sans">Emergency Medical Services</span><br><span class="lang-ta">அவசர மருத்துவ சேவைகள்</span>
+                    </p>
+                    <p class="text-lg mt-3">
+                        <span class="font-sans">Your feedback helps us improve.</span><br><span class="lang-ta">உங்கள் கருத்து எங்களை மேம்படுத்த உதவுகிறது.</span>
+                    </p>
                 </div>
-                 <div class="absolute top-8 right-8 flex gap-4">
+                 <div class="absolute top-8 right-8 flex gap-3">
                     <button id="btn-en-inactive" class="lang-btn inactive">English</button>
                     <button id="btn-ta-active" class="lang-btn active">தமிழ்</button>
                 </div>
             </header>
-             <main class="p-8 md:p-12">
+             <main class="p-8 md:p-10">
                 <form id="feedbackFormTa">
                     <div class="form-section bg-slate-50">
                         <p class="question-text">1. உங்கள் காத்திருப்பு நேரத்தை நீங்கள் எப்படி மதிப்பிடுவீர்கள்?</p>
@@ -222,14 +236,14 @@
                     </div>
                     <div class="form-section bg-slate-50">
                         <p class="question-text">5. உங்களுக்கு வேறு ஏதேனும் கருத்துகள், பரிந்துரைகள் அல்லது புகார்கள் உள்ளதா? (விருப்பத்திற்குரியது)</p>
-                        <textarea name="comments" rows="5" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் கருத்துகளை இங்கே உள்ளிடவும்..."></textarea>
+                        <textarea name="comments" rows="4" class="w-full p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் கருத்துகளை இங்கே உள்ளிடவும்..."></textarea>
                     </div>
                      <div class="form-section bg-slate-50">
                         <p class="question-text">6. உங்கள் கருத்தைப் பற்றி விவாதிக்க, உங்கள் தொலைபேசி எண்ணை வழங்கவும். (விருப்பத்திற்குரியது)</p>
-                        <input type="tel" name="phone_number" class="w-full p-6 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்...">
+                        <input type="tel" name="phone_number" class="w-full p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300" placeholder="உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்...">
                     </div>
-                    <div class="mt-12 text-center">
-                        <button type="submit" id="submitBtnTa" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full shadow-lg transform hover:scale-105">
+                    <div class="mt-8 text-center">
+                        <button type="submit" id="submitBtnTa" class="btn-submit bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow-lg transform hover:scale-105">
                             கருத்தை சமர்ப்பிக்கவும்
                         </button>
                     </div>
@@ -304,8 +318,6 @@
                 body: JSON.stringify(data)
             })
             .then(res => {
-                // Because of 'no-cors' mode, we can't read the response.
-                // We assume success and show the thank you message.
                 showThankYouMessage(lang);
             })
             .catch(error => {
@@ -319,16 +331,17 @@
         }
 
         function showThankYouMessage(lang) {
+            // Adjusted Thank You Font Sizes
              const thankYouHTML = lang === 'en' 
-                ? `<div class="text-8xl mb-8">✓</div>
-                   <h2 class="text-7xl font-bold mb-6">Thank You!</h2>
-                   <p class="text-4xl">Your feedback has been submitted successfully.</p>
-                   <p class="text-3xl mt-12">This screen will reset shortly.</p>`
+                ? `<div class="text-7xl mb-8">✓</div>
+                   <h2 class="text-6xl font-bold mb-6">Thank You!</h2>
+                   <p class="text-3xl">Your feedback has been submitted successfully.</p>
+                   <p class="text-2xl mt-12">This screen will reset shortly.</p>`
                 : `<div class="lang-ta">
-                     <div class="text-8xl mb-8">✓</div>
-                     <h2 class="text-7xl font-bold mb-6">நன்றி!</h2>
-                     <p class="text-4xl">உங்கள் கருத்து வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.</p>
-                     <p class="text-3xl mt-12">இந்தத் திரை விரைவில் மீட்டமைக்கப்படும்.</p>
+                     <div class="text-7xl mb-8">✓</div>
+                     <h2 class="text-6xl font-bold mb-6">நன்றி!</h2>
+                     <p class="text-3xl">உங்கள் கருத்து வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.</p>
+                     <p class="text-2xl mt-12">இந்தத் திரை விரைவில் மீட்டமைக்கப்படும்.</p>
                    </div>`;
 
             thankYouContent.innerHTML = thankYouHTML;
@@ -357,6 +370,7 @@
         feedbackFormTa.addEventListener('submit', (e) => handleFormSubmit(e, 'ta'));
 
         // --- Initial State ---
-        setLanguage('en'); // Set default language to English
+        setLanguage('en');
     </script></body>
 </html>
+
